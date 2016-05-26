@@ -6,5 +6,5 @@ import paths from '../paths.json';
 gulp.task('build', () => {
 	return gulp.src(paths.source.javascript)
 		.pipe(babel())
-		.pipe(gulp.dest(paths.build.directories.output));
+		.pipe(gulp.dest(paths.build.directories.es5));
 });
