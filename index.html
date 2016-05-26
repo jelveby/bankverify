@@ -1,0 +1,24 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+
+  <!-- <script src="bower_components/requirejs/require.js" ></script> -->
+  <script src="./dist/bankverify.min.js"></script>
+  <script>
+    // var Lib = require('Lib');
+    var account = Object.create(BankVerify.Account);
+    // account.init('3300-8012121458')
+    account.init('8323-6 988.123.838-4');
+    console.log('Valid account: ', account.valid());
+    console.log('Bank:', account.bank());
+    console.log('Clearing number:', account.clearingNumber());
+    console.log('Serial number:', account.serialNumber());
+    console.log('Normalized:', account.normalize());
+    console.log('Errors:', account.errors());
+  </script>
+</head>
+<body>
+
+</body>
+</html>
