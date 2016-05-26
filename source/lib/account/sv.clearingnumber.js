@@ -14,8 +14,7 @@ const Clearingnumber = [
   { interval: '5000..5999', name: 'SEB' },
   { interval: '6000..6999', name: 'Handelsbanken', maxLength: 9, minLength: 8 },
   { interval: '7000..7999', name: 'Swedbank' },
-  // Can be fewer chars but must be zero-filled, so let's call it 10.
-  { interval: '8000..8999', name: 'Swedbank', minLength: 10, checksumForClearing: true, zerofill: true },
+  { interval: '8000..8999', name: 'Swedbank', minLength: 10, checksumForClearing: true, zerofill: true }, // Can be fewer chars but must be zero-filled, so let's call it 10.
   { interval: '9020..9029', name: 'Länsförsäkringar Bank' },
   { interval: '9040..9049', name: 'Citibank' },
   { interval: '9060..9069', name: 'Länsförsäkringar Bank' },
