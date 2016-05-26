@@ -12,7 +12,7 @@
   },
   "build": {
     "directories": {
-      "output": "./build",
+      "output": "./dist",
       "es5": "./es5",
       "lib": "./es5/lib",
       "spec": "./es5/spec"
