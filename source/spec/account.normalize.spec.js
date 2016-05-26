@@ -8,8 +8,13 @@ describe('Account - Normalize', () => {
   });
 
   it('should normalize to clearing number dash serial number', () => {
-    account.init('11000000007');
-    account.normalize().should.eql('1100-0000007');
+    let no1 = Object.create(Account);
+    no1.init('11000000007');
+    let no2 = Object.create(Account);
+    no2.init('8323-6 988.123.838-4');
+
+    no1.normalize().should.eql('1100-0000007');
+    no2.normalize().should.eql('8323-6-9881238384');
   });
 
   it('should keep any Swedbank/Sparbanker clearing checksum', () => {

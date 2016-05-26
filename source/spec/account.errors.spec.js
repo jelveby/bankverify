@@ -90,9 +90,12 @@ describe('Account - Errors', () => {
     no1.init('1 2-3X');
     let no2 = Object.create(Account);
     no2.init('1 2-3');
+    let no3 = Object.create(Account);
+    no3.init('8381-6 994.348.947-7');
 
     no1.errors().should.include(Account.ERRORS.INVALID_CHARACTERS);
     no2.errors().should.not.include(Account.ERRORS.INVALID_CHARACTERS);
+    no3.errors().should.not.include(Account.ERRORS.INVALID_CHARACTERS);
   });
 
   it('should include :bad_checksum for Nordea personkonto if the serial Luhn/mod 10 checksum is incorrect', () => {

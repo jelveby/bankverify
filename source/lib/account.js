@@ -19,7 +19,7 @@ const Account = {
     if (this.serialNumber().length > this.serialNumberLength().max) {
       errors.push(this.ERRORS.TOO_LONG);
     }
-    if (this.getAccountNumber().match(/[^\d -]/)) {
+    if (this.getAccountNumber().match(/[^\d -\.]/)) {
       errors.push(this.ERRORS.INVALID_CHARACTERS);
     }
 
