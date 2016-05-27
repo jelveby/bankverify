@@ -91,14 +91,14 @@ const Account = {
   zeroFill () {
     return this.bankData().zerofill || false;
   },
-  'ERRORS': Object.freeze({
+  ERRORS: Object.freeze({
     TOO_SHORT: ':too_short',
     TOO_LONG: ':too_long',
     INVALID_CHARACTERS: ':invalid_characters',
     BAD_CHECKSUM: ':bad_checksum',
     UNKNOWN_CLEARING_NUMBER: ':unknown_clearing_number'
   }),
-  'DEFAULTS': Object.freeze({
+  DEFAULTS: Object.freeze({
     MIN_LENGTH: 7,
     MAX_LENGTH: 7
   })
