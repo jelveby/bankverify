@@ -53,7 +53,7 @@ describe('Account - Errors', () => {
   ].forEach(accountNumber => {
     it(`should be empty for a number like ${accountNumber}`, () => {
       account.init(accountNumber);
-      account.errors().should.be.eql([]);
+      account.errors().should.eql([]);
     });
   });
 

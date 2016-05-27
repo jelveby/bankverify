@@ -8,8 +8,6 @@ describe('Account - Initialize', () => {
   });
 
   it('should initialize', () => {
-    account = Object.create(Account);
-
     account.should.satisfy((acc) => {
       return Object.getPrototypeOf(acc) === Account;
     });
