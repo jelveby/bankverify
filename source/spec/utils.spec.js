@@ -39,7 +39,9 @@ describe('Utils', () => {
 
   describe('mod11', () => {
     [
-      '71591293050'
+      '91234567891',
+      '71591293050',
+      '21591293055'
     ].forEach(number => {
       it(`should allow valid numbers like ${number}`, () => {
         expect(Utils.mod11(number)).to.be.true;
@@ -47,6 +49,7 @@ describe('Utils', () => {
     });
 
     [
+      '91234567892',
       '81591293050'
     ].forEach(number => {
       it(`should not allow invalid numbers like ${number}`, () => {
