@@ -14,7 +14,6 @@ describe('Plusgiro - Initialize', () => {
   });
 
   it('should initialize with a value', () => {
-    plusgiro.init('4-2');
-    plusgiro.number.should.eql('4-2');
+    plusgiro.init('4-2').number.should.eql('4-2');
   });
 });
