@@ -24,7 +24,7 @@ const Account = {
       errors.push(this.ERRORS.INVALID_CHARACTERS);
     }
 
-    if (this.luhnForSerial() && !Utils.validLuhn(this.serialNumber())) {
+    if (this.luhnForSerial() && !Utils.mod10(this.serialNumber())) {
       errors.push(this.ERRORS.BAD_CHECKSUM);
     }
 

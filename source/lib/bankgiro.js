@@ -24,7 +24,7 @@ const Bankgiro = {
       errors.push(this.ERRORS.INVALID_CHARACTERS);
     }
 
-    if (!Utils.validLuhn(this.digits())) {
+    if (!Utils.mod10(this.digits())) {
       errors.push(this.ERRORS.BAD_CHECKSUM);
     }
 

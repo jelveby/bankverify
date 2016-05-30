@@ -1,5 +1,5 @@
 const Utils = {
-  validLuhn: function (value) {
+  mod10: function (value) {
     if (/[^0-9-\s]+/.test(value)) { return false; }
 
     let len = value.length,

@@ -81,10 +81,10 @@ describe('Account - Errors', () => {
   });
 
   it('should include BAD_CHECKSUM for Nordea personkonto if the serial Luhn/mod 10 checksum is incorrect', () => {
-    account.init('3300-800928-6249').errors().should.not.include(Account.ERRORS.BAD_CHECKSUM);
+    account.init('3301-6249').errors().should.not.include(Account.ERRORS.BAD_CHECKSUM);
     account.init('3300-800928-6248').errors().should.include(Account.ERRORS.BAD_CHECKSUM);
 
-    Utils.validLuhn('k800928-6248').should.be.false;
+    Utils.mod10('k800928-6248').should.be.false;
   });
 
   it('should include UNKNOWN_CLEARING_NUMBER if the clearing number is unknown', () => {
