@@ -9,13 +9,11 @@ describe('Bankgiro - Fundraising', () => {
   });
 
   it('should be true for the number series 900-nnnn to 904-nnnn', () => {
-    bankgiro.init('902-0033');
-    bankgiro.fundraising().should.be.true;
+    bankgiro.init('902-0033').fundraising().should.be.true;
   });
 
   it('should be false for invalid numbers in the right series', () => {
-    bankgiro.init('902-0034');
-    bankgiro.fundraising().should.be.not.true;
+    bankgiro.init('902-0034').fundraising().should.be.not.true;
   });
 
   it('should be false for numbers outside the right series', () => {

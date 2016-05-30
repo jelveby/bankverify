@@ -4,7 +4,7 @@ const Bankgiro = {
   number: undefined,
   init(number) {
     this.number = number;
-    return this.number;
+    return this;
   },
   valid() {
     return !this.errors().length;
