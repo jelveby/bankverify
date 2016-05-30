@@ -18,7 +18,7 @@ describe('Bankgiro - Errors', () => {
     });
   });
 
-  it('should include :too_short for numbers shorter than 7 digits', () => {
+  it('should include TOO_SHORT for numbers shorter than 7 digits', () => {
     let giro1 = Object.create(Bankgiro);
     giro1.init(undefined);
     let giro2 = Object.create(Bankgiro);
@@ -34,12 +34,12 @@ describe('Bankgiro - Errors', () => {
     giro4.errors().should.include(Bankgiro.ERRORS.TOO_SHORT);
   });
 
-  it('should include :too_long for numbers longer than 8 digits', () => {
+  it('should include TOO_LONG for numbers longer than 8 digits', () => {
     bankgiro.init('7732-99929');
     bankgiro.errors().should.include(Bankgiro.ERRORS.TOO_LONG);
   });
 
-  it('should include :invalid_characters for numbers with other character than digits, spaces and dashes', () => {
+  it('should include INVALID_CHARACTERS for numbers with other character than digits, spaces and dashes', () => {
     let giro1 = Object.create(Bankgiro);
     giro1.init('5402-9681X');
     giro1.errors().should.include(Bankgiro.ERRORS.INVALID_CHARACTERS);
@@ -49,7 +49,7 @@ describe('Bankgiro - Errors', () => {
     giro2.errors().should.not.include(Bankgiro.ERRORS.INVALID_CHARACTERS);
   });
 
-  it('should include :bad_checksum if the Luhn/mod 10 checksum is incorrect', () => {
+  it('should include BAD_CHECKSUM if the Luhn/mod 10 checksum is incorrect', () => {
     bankgiro.init('5402-9682');
     bankgiro.errors().should.include(Bankgiro.ERRORS.BAD_CHECKSUM);
   });

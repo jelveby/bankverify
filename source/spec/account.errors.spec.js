@@ -62,7 +62,7 @@ describe('Account - Errors', () => {
     account.errors().should.include(Account.ERRORS.TOO_SHORT);
   });
 
-  it('should not include :too_short for Swedbank/Sparbanker numbers that can be zerofilled', () => {
+  it('should not include TOO_SHORT for Swedbank/Sparbanker numbers that can be zerofilled', () => {
     let no1 = Object.create(Account);
     no1.init('8000-2-00000000');
     let no2 = Object.create(Account);
@@ -75,17 +75,17 @@ describe('Account - Errors', () => {
     no3.errors().should.not.include(Account.ERRORS.TOO_SHORT);
   });
 
-  it('should include :too_long for numbers longer than the bank allows', () => {
+  it('should include TOO_LONG for numbers longer than the bank allows', () => {
     account.init('1100000000007');
     account.errors().should.include(Account.ERRORS.TOO_LONG);
   });
 
-  it('should not include :too_long for Swedbank/Sparbanker numbers with clearing checksum', () => {
+  it('should not include TOO_LONG for Swedbank/Sparbanker numbers with clearing checksum', () => {
     account.init('8000-2-0000000000');
     account.errors().should.not.include(Account.ERRORS.TOO_LONG);
   });
 
-  it('should include :invalid_characters for numbers with other character than digits, spaces and dashes', () => {
+  it('should include INVALID_CHARACTERS for numbers with other character than digits, spaces and dashes', () => {
     let no1 = Object.create(Account);
     no1.init('1 2-3X');
     let no2 = Object.create(Account);
@@ -98,7 +98,7 @@ describe('Account - Errors', () => {
     no3.errors().should.not.include(Account.ERRORS.INVALID_CHARACTERS);
   });
 
-  it('should include :bad_checksum for Nordea personkonto if the serial Luhn/mod 10 checksum is incorrect', () => {
+  it('should include BAD_CHECKSUM for Nordea personkonto if the serial Luhn/mod 10 checksum is incorrect', () => {
     let no1 = Object.create(Account);
     no1.init('3300-800928-6249');
     let no2 = Object.create(Account);
@@ -109,7 +109,7 @@ describe('Account - Errors', () => {
     no2.errors().should.include(Account.ERRORS.BAD_CHECKSUM);
   });
 
-  it('should include :unknown_clearing_number if the clearing number is unknown', () => {
+  it('should include UNKNOWN_CLEARING_NUMBER if the clearing number is unknown', () => {
     let no1 = Object.create(Account);
     no1.init('10000000009');
     let no2 = Object.create(Account);

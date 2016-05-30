@@ -47,10 +47,10 @@ const Bankgiro = {
     return this.getNumber().replace(/\D/g, '');
   },
   ERRORS: Object.freeze({
-    TOO_SHORT: ':too_short',
-    TOO_LONG: ':too_long',
-    INVALID_CHARACTERS: ':invalid_characters',
-    BAD_CHECKSUM: ':bad_checksum'
+    TOO_SHORT: 'TOO_SHORT',
+    TOO_LONG: 'TOO_LONG',
+    INVALID_CHARACTERS: 'INVALID_CHARACTERS',
+    BAD_CHECKSUM: 'BAD_CHECKSUM'
   })
 };
 

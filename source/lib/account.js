@@ -92,11 +92,11 @@ const Account = {
     return this.bankData().zerofill || false;
   },
   ERRORS: Object.freeze({
-    TOO_SHORT: ':too_short',
-    TOO_LONG: ':too_long',
-    INVALID_CHARACTERS: ':invalid_characters',
-    BAD_CHECKSUM: ':bad_checksum',
-    UNKNOWN_CLEARING_NUMBER: ':unknown_clearing_number'
+    TOO_SHORT: 'TOO_SHORT',
+    TOO_LONG: 'TOO_LONG',
+    INVALID_CHARACTERS: 'INVALID_CHARACTERS',
+    BAD_CHECKSUM: 'BAD_CHECKSUM',
+    UNKNOWN_CLEARING_NUMBER: 'UNKNOWN_CLEARING_NUMBER'
   }),
   DEFAULTS: Object.freeze({
     MIN_LENGTH: 7,
