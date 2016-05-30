@@ -6,6 +6,7 @@ const Account = {
   accountNumber: undefined,
   init (accountNumber) {
     this.accountNumber = accountNumber;
+    return this;
   },
   valid () {
     return !this.errors().length;

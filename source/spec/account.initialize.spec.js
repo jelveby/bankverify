@@ -15,15 +15,11 @@ describe('Account - Initialize', () => {
 
   it('should set accountNumber', () => {
     let accountNumber = '3000-0000000000';
-    account.init(accountNumber);
-
-    account.getAccountNumber().should.equal(accountNumber);
+    account.init(accountNumber).getAccountNumber().should.equal(accountNumber);
   });
 
   it('should return account number in only digits', () => {
-    account.init('3000-0000000000');
-
-    account.digits().should.equal('30000000000000');
+    account.init('3000-0000000000').digits().should.equal('30000000000000');
   });
 
 });

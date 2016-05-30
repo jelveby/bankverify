@@ -52,70 +52,43 @@ describe('Account - Errors', () => {
     '9960-00'             // Nordea/Plusgirot.
   ].forEach(accountNumber => {
     it(`should be empty for a number like ${accountNumber}`, () => {
-      account.init(accountNumber);
-      account.errors().should.eql([]);
+      account.init(accountNumber).errors().should.eql([]);
     });
   });
 
   it('should include TOO_SHORT for numbers shorter than the bank allows', () => {
-    account.init('11007');
-    account.errors().should.include(Account.ERRORS.TOO_SHORT);
+    account.init('11007').errors().should.include(Account.ERRORS.TOO_SHORT);
   });
 
   it('should not include TOO_SHORT for Swedbank/Sparbanker numbers that can be zerofilled', () => {
-    let no1 = Object.create(Account);
-    no1.init('8000-2-00000000');
-    let no2 = Object.create(Account);
-    no2.init('9300-2-00000000');
-    let no3 = Object.create(Account);
-    no3.init('9570-2-00000000');
-
-    no1.errors().should.not.include(Account.ERRORS.TOO_SHORT);
-    no2.errors().should.not.include(Account.ERRORS.TOO_SHORT);
-    no3.errors().should.not.include(Account.ERRORS.TOO_SHORT);
+    account.init('8000-2-00000000').errors().should.not.include(Account.ERRORS.TOO_SHORT);
+    account.init('9300-2-00000000').errors().should.not.include(Account.ERRORS.TOO_SHORT);
+    account.init('9570-2-00000000').errors().should.not.include(Account.ERRORS.TOO_SHORT);
   });
 
   it('should include TOO_LONG for numbers longer than the bank allows', () => {
-    account.init('1100000000007');
-    account.errors().should.include(Account.ERRORS.TOO_LONG);
+    account.init('1100000000007').errors().should.include(Account.ERRORS.TOO_LONG);
   });
 
   it('should not include TOO_LONG for Swedbank/Sparbanker numbers with clearing checksum', () => {
-    account.init('8000-2-0000000000');
-    account.errors().should.not.include(Account.ERRORS.TOO_LONG);
+    account.init('8000-2-0000000000').errors().should.not.include(Account.ERRORS.TOO_LONG);
   });
 
   it('should include INVALID_CHARACTERS for numbers with other character than digits, spaces and dashes', () => {
-    let no1 = Object.create(Account);
-    no1.init('1 2-3X');
-    let no2 = Object.create(Account);
-    no2.init('1 2-3');
-    let no3 = Object.create(Account);
-    no3.init('8381-6 994.348.947-7');
-
-    no1.errors().should.include(Account.ERRORS.INVALID_CHARACTERS);
-    no2.errors().should.not.include(Account.ERRORS.INVALID_CHARACTERS);
-    no3.errors().should.not.include(Account.ERRORS.INVALID_CHARACTERS);
+    account.init('1 2-3X').errors().should.include(Account.ERRORS.INVALID_CHARACTERS);
+    account.init('1 2-3').errors().should.not.include(Account.ERRORS.INVALID_CHARACTERS);
+    account.init('8381-6 994.348.947-7').errors().should.not.include(Account.ERRORS.INVALID_CHARACTERS);
   });
 
   it('should include BAD_CHECKSUM for Nordea personkonto if the serial Luhn/mod 10 checksum is incorrect', () => {
-    let no1 = Object.create(Account);
-    no1.init('3300-800928-6249');
-    let no2 = Object.create(Account);
-    no2.init('3300-800928-6248');
+    account.init('3300-800928-6249').errors().should.not.include(Account.ERRORS.BAD_CHECKSUM);
+    account.init('3300-800928-6248').errors().should.include(Account.ERRORS.BAD_CHECKSUM);
 
     Utils.validLuhn('k800928-6248').should.be.false;
-    no1.errors().should.not.include(Account.ERRORS.BAD_CHECKSUM);
-    no2.errors().should.include(Account.ERRORS.BAD_CHECKSUM);
   });
 
   it('should include UNKNOWN_CLEARING_NUMBER if the clearing number is unknown', () => {
-    let no1 = Object.create(Account);
-    no1.init('10000000009');
-    let no2 = Object.create(Account);
-    no2.init('11000000007');
-
-    no1.errors().should.include(Account.ERRORS.UNKNOWN_CLEARING_NUMBER);
-    no2.errors().should.not.include(Account.ERRORS.UNKNOWN_CLEARING_NUMBER);
+    account.init('10000000009').errors().should.include(Account.ERRORS.UNKNOWN_CLEARING_NUMBER);
+    account.init('11000000007').errors().should.not.include(Account.ERRORS.UNKNOWN_CLEARING_NUMBER);
   });
 });
