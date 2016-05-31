@@ -24,8 +24,4 @@ describe('Account - Serial number', () => {
   it('should be the empty string if there are not enough numbers', () => {
     account.init('12').serialNumber().should.eql('');
   });
-
-  it('should return wether or not it should check serial with luhn algorithm', () => {
-    account.init('3300-8012121458').luhnForSerial().should.be.true;
-  });
 });

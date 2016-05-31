@@ -24,7 +24,7 @@ const Account = {
       errors.push(this.ERRORS.INVALID_CHARACTERS);
     }
 
-    if (this.luhnForSerial() && !Utils.mod10(this.serialNumber())) {
+    if (this.shouldValidate() && !this.validateSerial()) {
       errors.push(this.ERRORS.BAD_CHECKSUM);
     }
 
@@ -63,7 +63,6 @@ const Account = {
     let number = this.digits().slice(this.clearingNumberLength());
 
     return this.zeroFill() ? padLeft(number, this.serialNumberLength().min, 0) : number;
-    // return number;
   },
   serialNumberLength () {
     return {
@@ -71,8 +70,22 @@ const Account = {
       max: this.bankData().maxLength || this.bankData().minLength || this.DEFAULTS.MAX_LENGTH
     };
   },
-  luhnForSerial () {
-    return this.bankData().luhnForSerial;
+  shouldValidate() {
+    return !!this.bankData().algorithm;
+  },
+  validateSerial() {
+    if (this.bankData().algorithm === 'mod10' && !Utils.mod10(this.validationNumbers())) {
+      return false;
+    } else if (this.bankData().algorithm === 'mod11' && !Utils.mod11(this.validationNumbers())) {
+      return false;
+    }
+
+    return true;
+  },
+  validationNumbers() {
+    let length = this.bankData().weightedNumbers;
+
+    return this.digits().slice(-length);
   },
   clearingNumber () {
     return [
