@@ -10,45 +10,56 @@ describe('Account - Errors', () => {
 
   [
     '1100-0000000',       // Nordea.
-    '1200-0000000',       // Danske Bank.
-    '1400-0000000',       // Nordea.
-    '2300-0000000',       // Ålandsbanken.
-    '2400-0000000',       // Danske Bank.
+    '1200-0000009',       // Danske Bank.
+    '1400-0000007',       // Nordea.
+    '2300-0000001',       // Ålandsbanken.
+    '2400-0000007',       // Danske Bank.
     '3000-0000000',       // Nordea.
     '3300-800928-6249',   // Nordea personkonto.
-    '3301-0000000',       // Nordea.
-    '3400-0000000',       // Länsförsäkringar Bank.
-    '3410-0000000',       // Nordea.
+    '3301-1000002',       // Nordea.
+    '3400-0000007',       // Länsförsäkringar Bank.
+    '3410-0000008',       // Nordea.
     '3782-800928-6249',   // Nordea personkonto.
-    '3783-0000000',       // Nordea.
+    '3783-0000007',       // Nordea.
+    '4000-0000007',       // Nordea.
     '5000-0000000',       // SEB.
     '6000-000000000',     // Handelsbanken.
     '6000-00000000',      // Handelsbanken.
     '7000-0000000',       // Swedbank.
     '8000-2-0000000000',  // Swedbank/Sparbanker with clearing number checksum.
-    '9020-0000000',       // Länsförsäkringar Bank.
-    '9040-0000000',       // Citibank.
-    '9060-0000000',       // Länsförsäkringar Bank.
-    '9090-0000000',       // Royal Bank of Scotland.
-    '9100-0000000',       // Nordnet Bank.
-    '9120-0000000',       // SEB.
-    '9130-0000000',       // SEB.
-    '9150-0000000',       // Skandiabanken.
-    '9170-0000000',       // Ikano Bank.
+    '9020-0000006',       // Länsförsäkringar Bank.
+    '9040-1000003',       // Citibank.
+    '9060-0000006',       // Länsförsäkringar Bank.
+    '9090-0000009',       // Royal Bank of Scotland.
+    '9100-0000003',       // Nordnet Bank.
+    '9120-1000004',       // SEB.
+    '9130-0000002',       // SEB.
+    '9150-0000002',       // Skandiabanken.
+    '9170-0000006',       // Ikano Bank.
     '9180-0000000000',    // Danske Bank.
-    '9190-0000000',       // Den Norske Bank.
-    '9230-0000000',       // Marginalen.
-    '9250-0000000',       // SBAB.
-    '9260-0000000',       // Den Norske Bank.
-    '9270-0000000',       // ICA Banken.
-    '9280-0000000',       // Resurs Bank.
+    '9190-1000003',       // DNB Bank.
+    '9230-1000004',       // Marginalen.
+    '9250-0000003',       // SBAB.
+    '9260-0000005',       // DNB Bank.
+    '9270-0000005',       // ICA Banken.
+    '9280-0000006',       // Resurs Bank.
     '9300-0000000000',    // Sparbanken Öresund.
-    '9400-0000000',       // Forex Bank.
-    '9460-0000000',       // GE Money Bank.
-    '9470-0000000',       // Fortis Bank.
+    '9390-0000001',       // Landshypotek AB.
+    '9400-0000007',       // Forex Bank.
+    '9460-0000002',       // Santander Consumer Bank AS.
+    '9470-0000009',       // BNP Paribas Fortis Bank.
     '9500-00',            // Nordea/Plusgirot.
-    '9550-0000000',       // Avanza Bank.
+    '9550-0000006',       // Avanza Bank.
     '9570-0000000000',    // Sparbanken Syd.
+    '9590-0000003',       // Erik Penser AB.
+    '9630-0000008',       // Lån & Spar Bank Sverige.
+    '9640-0000005',       // Nordax Bank AB.
+    '9660-0000009',       // Amfa Bank AB.
+    '9670-0000000',       // JAK Medlemsbank.
+    '9680-0000002',       // BlueStep Finans AB.
+    '9700-0000009',       // Ekobanken.
+    '9880-0000004',       // Riksgälden.
+    '9890-0000000000',    // Riksgälden.
     '9960-00'             // Nordea/Plusgirot.
   ].forEach(accountNumber => {
     it(`should be empty for a number like ${accountNumber}`, () => {
@@ -81,7 +92,7 @@ describe('Account - Errors', () => {
   });
 
   it('should include BAD_CHECKSUM for Nordea personkonto if the serial Luhn/mod 10 checksum is incorrect', () => {
-    account.init('3301-6249').errors().should.not.include(Account.ERRORS.BAD_CHECKSUM);
+    account.init('800928-6249').errors().should.not.include(Account.ERRORS.BAD_CHECKSUM);
     account.init('3300-800928-6248').errors().should.include(Account.ERRORS.BAD_CHECKSUM);
 
     Utils.mod10('k800928-6248').should.be.false;
