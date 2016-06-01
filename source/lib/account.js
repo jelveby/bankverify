@@ -90,7 +90,9 @@ const Account = {
 
     if (type === AccountType.TYPE1 || type === AccountType.TYPE2) {
       numbers = this.digits().slice(-length);
-    } else if (type === AccountType.TYPE3 || type === AccountType.TYPE4 || type === AccountType.TYPE5) {
+    }
+
+    if (type === AccountType.TYPE3 || type === AccountType.TYPE4 || type === AccountType.TYPE5) {
       numbers = this.serialNumber().slice(-length);
     }
 
