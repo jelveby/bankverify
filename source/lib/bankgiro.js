@@ -1,4 +1,5 @@
 import Utils from './utils.js';
+import Errors from './errors.js';
 
 const Bankgiro = {
   number: undefined,
@@ -13,19 +14,19 @@ const Bankgiro = {
     let errors = [];
 
     if (this.digits().length < 7) {
-      errors.push(this.ERRORS.TOO_SHORT);
+      errors.push(Errors.TOO_SHORT);
     }
 
     if (this.digits().length > 8) {
-      errors.push(this.ERRORS.TOO_LONG);
+      errors.push(Errors.TOO_LONG);
     }
 
     if (this.getNumber().match(/[^\d -]/)) {
-      errors.push(this.ERRORS.INVALID_CHARACTERS);
+      errors.push(Errors.INVALID_CHARACTERS);
     }
 
     if (!Utils.mod10(this.digits())) {
-      errors.push(this.ERRORS.BAD_CHECKSUM);
+      errors.push(Errors.BAD_CHECKSUM);
     }
 
     return errors;
@@ -45,13 +46,7 @@ const Bankgiro = {
   },
   digits() {
     return this.getNumber().replace(/\D/g, '');
-  },
-  ERRORS: Object.freeze({
-    TOO_SHORT: 'TOO_SHORT',
-    TOO_LONG: 'TOO_LONG',
-    INVALID_CHARACTERS: 'INVALID_CHARACTERS',
-    BAD_CHECKSUM: 'BAD_CHECKSUM'
-  })
+  }
 };
 
 export default Bankgiro;

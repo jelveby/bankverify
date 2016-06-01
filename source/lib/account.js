@@ -1,5 +1,6 @@
 import Clearingnumber from './account/sv.clearingnumber.js';
 import AccountType from './account/accountType.js';
+import Errors from './errors.js';
 import padLeft from 'pad-left';
 import Utils from './utils.js';
 
@@ -16,21 +17,21 @@ const Account = {
     let errors = [];
 
     if (this.serialNumber().length < this.serialNumberLength().min) {
-      errors.push(this.ERRORS.TOO_SHORT);
+      errors.push(Errors.TOO_SHORT);
     }
     if (this.serialNumber().length > this.serialNumberLength().max) {
-      errors.push(this.ERRORS.TOO_LONG);
+      errors.push(Errors.TOO_LONG);
     }
     if (this.getAccountNumber().match(/[^\d -\.]/)) {
-      errors.push(this.ERRORS.INVALID_CHARACTERS);
+      errors.push(Errors.INVALID_CHARACTERS);
     }
 
     if (this.shouldValidate() && !this.validateSerial()) {
-      errors.push(this.ERRORS.BAD_CHECKSUM);
+      errors.push(Errors.BAD_CHECKSUM);
     }
 
     if (this.bankData().name === undefined) {
-      errors.push(this.ERRORS.UNKNOWN_CLEARING_NUMBER);
+      errors.push(Errors.UNKNOWN_CLEARING_NUMBER);
     }
 
     return errors;
@@ -116,13 +117,6 @@ const Account = {
   zeroFill () {
     return this.bankData().zerofill || false;
   },
-  ERRORS: Object.freeze({
-    TOO_SHORT: 'TOO_SHORT',
-    TOO_LONG: 'TOO_LONG',
-    INVALID_CHARACTERS: 'INVALID_CHARACTERS',
-    BAD_CHECKSUM: 'BAD_CHECKSUM',
-    UNKNOWN_CLEARING_NUMBER: 'UNKNOWN_CLEARING_NUMBER'
-  }),
   DEFAULTS: Object.freeze({
     MIN_LENGTH: 7,
     MAX_LENGTH: 7
