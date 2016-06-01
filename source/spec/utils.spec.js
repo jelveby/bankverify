@@ -56,6 +56,10 @@ describe('Utils', () => {
         expect(Utils.mod11(number)).to.be.false;
       });
     });
+
+    it('should return false for numbers longer than 11 characters', () => {
+      Utils.mod11('020202020202').should.be.false;
+    });
   });
 
 });
