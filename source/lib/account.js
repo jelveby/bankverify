@@ -1,4 +1,5 @@
 import Clearingnumber from './account/sv.clearingnumber.js';
+import AccountType from './account/accountType.js';
 import padLeft from 'pad-left';
 import Utils from './utils.js';
 
@@ -71,21 +72,29 @@ const Account = {
     };
   },
   shouldValidate() {
-    return !!this.bankData().algorithm;
+    return this.bankData().type && !!this.bankData().type.algorithm;
   },
   validateSerial() {
-    if (this.bankData().algorithm === 'mod10' && !Utils.mod10(this.validationNumbers())) {
+    if (this.bankData().type.algorithm === 'mod10' && !Utils.mod10(this.validationNumbers())) {
       return false;
-    } else if (this.bankData().algorithm === 'mod11' && !Utils.mod11(this.validationNumbers())) {
+    } else if (this.bankData().type.algorithm === 'mod11' && !Utils.mod11(this.validationNumbers())) {
       return false;
     }
 
     return true;
   },
   validationNumbers() {
-    let length = this.bankData().weightedNumbers;
+    let length = this.bankData().type.weightedNumbers;
+    let type = this.bankData().type;
+    let numbers;
 
-    return this.digits().slice(-length);
+    if (type === AccountType.TYPE1 || type === AccountType.TYPE2) {
+      numbers = this.digits().slice(-length);
+    } else if (type === AccountType.TYPE3 || type === AccountType.TYPE4 || type === AccountType.TYPE5) {
+      numbers = this.serialNumber().slice(-length);
+    }
+
+    return numbers;
   },
   clearingNumber () {
     return [
