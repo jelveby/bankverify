@@ -9,7 +9,7 @@ describe('Account - Normalize', () => {
 
   it('should normalize to clearing number dash serial number', () => {
     account.init('11000000000').normalize().should.eql('1100-0000000');
-    account.init('8323-6 988.123.838-4').normalize().should.eql('8323-6-9881238384');
+    account.init('8323-6 988.123.838-1').normalize().should.eql('8323-6-9881238381');
   });
 
   it('should keep any Swedbank/Sparbanker clearing checksum', () => {
