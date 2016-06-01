@@ -1,3 +1,5 @@
+// Based on: https://www.bankgirot.se/globalassets/dokument/anvandarmanualer/bankernaskontonummeruppbyggnad_anvandarmanual_sv.pdf
+
 const AccountType = {
   TYPE1: { algorithm: 'mod11', clearingLength: 4, serialLength: 7, weightedNumbers: 10 },
   TYPE2: { algorithm: 'mod11', clearingLength: 4, serialLength: 7, weightedNumbers: 11 },
