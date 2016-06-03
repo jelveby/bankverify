@@ -64,6 +64,8 @@ const Account = {
   serialNumber () {
     let number = this.digits().slice(this.clearingNumberLength());
 
+    if (number.length === 0) { return number; }
+
     return this.zeroFill() ? padLeft(number, this.serialNumberLength().min, 0) : number;
   },
   serialNumberLength () {
