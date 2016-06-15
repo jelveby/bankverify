@@ -22,8 +22,31 @@ if (typeof Object.create !== 'function') {
 		};
 	})();
 }
+
+const init = function (number, type = 'account') {
+	let account;
+
+	switch (type) {
+		case 'bankgiro':
+			account = Object.create(Bankgiro);
+			break;
+		case 'plusgiro':
+			account = Object.create(Plusgiro);
+			break;
+		case 'account':
+			account = Object.create(Account);
+			break;
+	}
+
+	if (!account) {
+		throw new Error('Invalid account type');
+	}
+
+	account.init(number);
+
+	return account;
+};
+
 export {
-  Account,
-  Bankgiro,
-  Plusgiro
+	init
 };
