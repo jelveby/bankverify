@@ -1,0 +1,101 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+
+  <style>
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 300;
+    }
+
+    h4 {
+      margin: 4px 0 10px;
+    }
+
+    p {
+      margin: 3px 0;
+    }
+
+    .account {
+      background-color: #eee;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      padding: 4px 10px;
+      width: 400px;
+    }
+
+    [class^="valid"] {
+      color: #fff;
+      padding: 2px 3px;
+      border-radius: 3px;
+    }
+
+    .valid-false {
+      background-color: #f66;
+    }
+
+    .valid-true {
+      background-color: #6f6;
+    }
+  </style>
+
+  <script src="./dist/bankverify.min.js"></script>
+  <script>
+    var TemplateEngine = function(html, options) {
+      var re = /<%([^%>]+)?%>/g, reExp = /(^( )?(if|for|else|switch|case|break|{|}))(.*)?/g, code = 'var r=[];\n', cursor = 0, match;
+      var add = function(line, js) {
+        js? (code += line.match(reExp) ? line + '\n' : 'r.push(' + line + ');\n') :
+            (code += line != '' ? 'r.push("' + line.replace(/"/g, '\\"') + '");\n' : '');
+        return add;
+      }
+      while(match = re.exec(html)) {
+        add(html.slice(cursor, match.index))(match[1], true);
+        cursor = match.index + match[0].length;
+      }
+      add(html.substr(cursor, html.length - cursor));
+      code += 'return r.join("");';
+
+      return new Function(code.replace(/[\r\t\n]/g, '')).apply(options);
+    }
+
+    var account1 = BankVerify.init('8323-6 988.123.838-4', 'account');
+    var account2 = BankVerify.init('8381-6 994.348.947-7', 'account');
+    var account3 = BankVerify.init('8381-6', 'account');
+    var account4 = BankVerify.init('832799030933684', 'account');
+    var account5 = BankVerify.init('832799030933', 'account');
+
+    var accounts = [
+      account1,
+      account2,
+      account3,
+      account4,
+      account5
+    ];
+
+    var shadow = document.createDocumentFragment();
+
+    var template =
+      '<h2>Accounts</h2>' +
+        '<%for(var index in this.accounts) {%>' +
+          '<div class="account">' +
+          '<h4><%this.accounts[index].getAccountNumber()%></h4>' +
+          '<p>Bank: <%this.accounts[index].bank()%></p>' +
+          '<p>Clearing number: <%this.accounts[index].clearingNumber()%></p>' +
+          '<p>Serial number: <%this.accounts[index].serialNumber()%></p>' +
+          '<p>Normalized: <%this.accounts[index].normalize()%></p>' +
+          '<p>Valid: <span class="valid-<%this.accounts[index].valid()%>"><%this.accounts[index].valid()%></p>' +
+          '</div>' +
+        '<%}%>';
+
+    window.addEventListener('load', function () {
+      document.querySelector('body').innerHTML = TemplateEngine(template, {
+        accounts: accounts
+      });
+    })
+  </script>
+</head>
+<body>
+
+</body>
+</html>
