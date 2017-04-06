@@ -1,6 +1,6 @@
 # Bankverify
 
-I needed a way to do a quick verification of Swedish bank accounts.
+I needed a way to do a quick verification of Swedish bank accounts. Supports personal accounts from a wide variety of banks, Bankgiro as well as Plusgiro.
 
 ## Usage
 
