@@ -5,7 +5,7 @@ I needed a way to do a quick verification of Swedish bank accounts.
 ## Usage
 
 ``` JavaScript
-let account = BankVerify.init('832369881238384', 'account');
+let account = BankVerify.init('8323-6 988.123.838-4', 'account');
 ```
 
 ``` JavaScript
