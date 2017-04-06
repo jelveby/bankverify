@@ -1,6 +1,6 @@
 {
-  "name": "accounts",
-  "version": "0.0.1",
+  "name": "bankverify",
+  "version": "0.8",
   "description": "",
   "main": "index.js",
   "scripts": {
