@@ -10,7 +10,7 @@ describe('Account - Errors', () => {
   });
 
   [
-    '1100-0000000',       // Nordea.
+    '1100-0000001',       // Nordea.
     '1200-0000009',       // Danske Bank.
     '1400-0000007',       // Nordea.
     '2300-0000001',       // Ålandsbanken.
