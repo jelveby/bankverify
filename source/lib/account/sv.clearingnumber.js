@@ -1,7 +1,7 @@
 import AccountType from './accountType.js';
 
 const Clearingnumber = [
-  { interval: '1100..1199', name: 'Nordea', type: AccountType.TYPE2 },
+  { interval: '1100..1199', name: 'Nordea', type: AccountType.TYPE1 },
   { interval: '1200..1399', name: 'Danske Bank', type: AccountType.TYPE1 },
   { interval: '1400..2099', name: 'Nordea', type: AccountType.TYPE1 },
   { interval: '2300..2399', name: 'Ålandsbanken', type: AccountType.TYPE2 },
